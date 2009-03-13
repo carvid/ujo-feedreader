@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="RssTask" default="compile" basedir=".">
+    <description>Builds, tests, and runs the jWorkSheet module RssTask.</description>
+
+    <!-- ================ properties ================ -->
+    <property file="build.properties"/>
+    <property file="${user.home}/build.properties"/>
+
+    <property name="src.home"       value="${basedir}/src"/>
+    <property name="build.home"     value="${basedir}/build"/>
+    <property name="dist.home"      value="${basedir}/dist"/>
+
+    <property name="compile.debug"          value="true"/>
+    <property name="compile.deprecation"    value="false"/>
+    <property name="compile.optimize"       value="true"/>
+    <property name="compile.lint"           value="unchecked"/>
+    <property name="compile.encoding"       value="UTF-8"/>
+
+    <!-- ================ init ================ -->
+
+    <target name="init">
+        <mkdir dir="${build.home}"/>
+    </target>
+
+    <target name="clean">
+        <delete includeEmptyDirs="true" quiet="true">
+            <fileset dir="${build.home}"/>
+            <fileset dir="${dist.home}"/>
+        </delete>
+    </target>
+
+    <!-- ================ build ================ -->
+
+    <path id="compile.classpath">
+        <!-- Include this app lib directory -->
+        <fileset dir="${basedir}/lib">
+          <include name="*.jar"/>
+        </fileset>
+    </path>
+
+    <target name="compile" depends="prepare"
+        description="Compile Java sources">
+
+        <!-- Compile Java classes as necessary -->
+        <javac srcdir="${src.home}"
+              destdir="${build.home}/classes"
+                debug="${compile.debug}"
+          deprecation="${compile.deprecation}"
+             encoding="${compile.encoding}"
+             optimize="${compile.optimize}">
+            <classpath refid="compile.classpath"/>
+            <compilerarg value="-Xlint:${compile.lint}"/>
+        </javac>
+
+        <!-- Copy application resources -->
+        <copy  todir="${build.home}/classes">
+            <fileset dir="${src.home}" excludes="**/*.java"/>
+        </copy>
+    </target>
+
+    <target name="prepare" >
+        <!-- Create build directories as needed -->
+        <mkdir  dir="${build.home}"/>
+        <mkdir  dir="${build.home}/classes"/>
+    </target>
+
+</project>
