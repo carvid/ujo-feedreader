@@ -2,17 +2,24 @@ package com.openchronicles.feedreader;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.util.Date;
 
 import org.ujoframework.core.UjoManagerXML;
 
 public class SampleFeedReader {
     public static void main(String args[]) {
         AtomFeed feed = new AtomFeed();
+        AtomTitle title = new AtomTitle();
+        AtomId id = new AtomId();
+        AtomUpdated updated = new AtomUpdated();
 
-        AtomFeed.TITLE.setValue(   feed, "Sample feed");
-        AtomFeed.LINK.setValue(    feed, "Link");
-        AtomFeed.ID.setValue(      feed, "1");
-        AtomFeed.UPDATED.setValue( feed, "2009-03-12");
+        AtomTitle.TITLE.setValue( title, "Sample feed");
+        AtomId.ID.setValue( id, "1");
+        AtomUpdated.DATE.setValue( updated, new Date());
+
+        AtomFeed.TITLE.setValue( feed, title);
+        AtomFeed.ID.setValue( feed, id);
+        AtomFeed.UPDATED.setValue( feed, updated);
 
         try {
             FileWriter out = new FileWriter("file.xml");
