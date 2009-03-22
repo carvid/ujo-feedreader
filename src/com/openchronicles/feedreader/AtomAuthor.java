@@ -11,13 +11,7 @@ import org.ujoframework.core.annot.XmlAttribute;
  * This class represents the author element of the Atom 1.0 specification.
  * @author Carlos David González Abraham
  */
-public class AtomAuthor extends MapUjo {
-    // atom common attributes
-    @XmlAttribute
-    public static final UjoProperty<AtomAuthor,String> BASE   = newProperty("base", "");
-    @XmlAttribute
-    public static final UjoProperty<AtomAuthor,String> LANG   = newProperty("lang", "");
-
+public class AtomAuthor extends AtomElement {
     // atom person elements
     public static final UjoProperty<AtomAuthor,String> NAME   = newProperty("name"  , "");
     public static final UjoProperty<AtomAuthor,String> URI    = newProperty("uri"   , "");

@@ -11,13 +11,7 @@ import org.ujoframework.core.annot.XmlAttribute;
  * This class represents the link element of the Atom 1.0 specification.
  * @author Carlos David González Abraham
  */
-public class AtomLink extends MapUjo {
-    // atom common attributes
-    @XmlAttribute
-    public static final UjoProperty<AtomLink,String> BASE   = newProperty("base", "");
-    @XmlAttribute
-    public static final UjoProperty<AtomLink,String> LANG   = newProperty("lang", "");
-
+public class AtomLink extends AtomElement {
     // atom link elements
     public static final UjoProperty<AtomLink,String> HREF      = newProperty("href"     , "");
     public static final UjoProperty<AtomLink,String> REL       = newProperty("rel"      , "");
