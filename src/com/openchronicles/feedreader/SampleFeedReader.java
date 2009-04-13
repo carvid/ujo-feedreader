@@ -12,14 +12,17 @@ public class SampleFeedReader {
         AtomTitle title = new AtomTitle();
         AtomId id = new AtomId();
         AtomUpdated updated = new AtomUpdated();
+        AtomAuthor author = new AtomAuthor();
 
         AtomTitle.TITLE.setValue( title, "Sample feed");
         AtomId.ID.setValue( id, "1");
-        AtomUpdated.DATE.setValue( updated, new Date());
+        AtomUpdated.BODY.setValue( updated, new Date().toString());
+        AtomAuthor.NAME.setValue( author, "Carlos David González Abraham");
 
         AtomFeed.TITLE.setValue( feed, title);
         AtomFeed.ID.setValue( feed, id);
         AtomFeed.UPDATED.setValue( feed, updated);
+        //AtomFeed.AUTHOR.setValue( feed, author);
 
         try {
             FileWriter out = new FileWriter("file.xml");
@@ -28,6 +31,18 @@ public class SampleFeedReader {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
+       File result = new File("/home/carvid/desarrollo/rsstask/issues.atom");
+       try {
+           AtomFeed feedreader = UjoManagerXML.getInstance().parseXML(result, AtomFeed.class, "Data Loading");
+           System.out.println(AtomFeed.TITLE.getValue(feedreader));
+
+            FileWriter out = new FileWriter("file.xml");
+            UjoManagerXML.getInstance().saveXML(out, "feed", feedreader, null, "My Export");
+            out.close();
+       } catch (Exception e) {
+           System.out.println(e.getMessage() + e.getCause());
+       }
 
     }
 }

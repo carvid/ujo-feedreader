@@ -10,9 +10,20 @@ import org.ujoframework.implementation.map.MapUjo;
  * This class represents the entry element of the Atom 1.0 specification.
  * @author Carlos David González Abraham
  */
-public class AtomEntry extends MapUjo {
-    public static final UjoProperty<AtomEntry,String> TITLE   = newProperty("title", "");
-    public static final UjoProperty<AtomEntry,String> LINK    = newProperty("link", null);
-    public static final UjoProperty<AtomEntry,String> ID      = newProperty("id", "");
-    public static final UjoProperty<AtomEntry,String> UPDATED = newProperty("updated", "");
+public class AtomEntry extends AtomElement {
+    /* sub-elements */
+    public static final UjoProperty<AtomEntry,AtomId>      ID
+         = newProperty("id",      AtomId.class);
+    public static final UjoProperty<AtomEntry,AtomContent> CONTENT
+         = newProperty("content", AtomContent.class);
+    public static final UjoProperty<AtomEntry,AtomTitle>   TITLE
+         = newProperty("title",   AtomTitle.class);
+    public static final UjoProperty<AtomEntry,AtomUpdated> UPDATED
+         = newProperty("updated", AtomUpdated.class);
+
+    /* collections */
+    public static final ListProperty<AtomEntry,AtomAuthor> AUTHORS
+        = newPropertyList("author", AtomAuthor.class);
+    public static final ListProperty<AtomFeed,AtomLink>    LINKS
+        = newPropertyList("link",   AtomLink.class);
 }

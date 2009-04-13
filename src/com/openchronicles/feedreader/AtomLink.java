@@ -12,12 +12,24 @@ import org.ujoframework.core.annot.XmlAttribute;
  * @author Carlos David González Abraham
  */
 public class AtomLink extends AtomElement {
-    // atom link elements
-    public static final UjoProperty<AtomLink,String> HREF      = newProperty("href"     , "");
-    public static final UjoProperty<AtomLink,String> REL       = newProperty("rel"      , "");
-    public static final UjoProperty<AtomLink,String> TYPE      = newProperty("type"     , "");
-    public static final UjoProperty<AtomLink,String> HREFLANG  = newProperty("hreflang" , "");
-    public static final UjoProperty<AtomLink,String> TITLE     = newProperty("title"    , "");
-    public static final UjoProperty<AtomLink,String> LENGTH    = newProperty("length"   , "");
+    /* attributes */
+    @XmlAttribute
+    public static final UjoProperty<AtomLink,String> HREF
+        = newProperty("href",     "");
+    @XmlAttribute
+    public static final UjoProperty<AtomLink,String> REL
+        = newProperty("rel",      "");
+    @XmlAttribute
+    public static final UjoProperty<AtomLink,String> TYPE
+        = newProperty("type",     "");
+    @XmlAttribute
+    public static final UjoProperty<AtomLink,String> HREFLANG
+        = newProperty("hreflang", "");
+    @XmlAttribute
+    public static final UjoProperty<AtomLink,String> TITLE
+        = newProperty("title",    "");
+    @XmlAttribute
+    public static final UjoProperty<AtomLink,String> LENGTH
+        = newProperty("length",   "");
 }
 

@@ -14,8 +14,9 @@ import org.ujoframework.core.annot.XmlElementBody;
  * @author Carlos David González Abraham
  */
 public class AtomUpdated extends AtomElement {
-    // atom updated elements
+    /* body */
     @XmlElementBody
-    public static final UjoProperty<AtomUpdated,Date> DATE  = newProperty("date", new Date());
+    public static final UjoProperty<AtomUpdated,String> BODY
+        = newProperty("body", "");
 }
 

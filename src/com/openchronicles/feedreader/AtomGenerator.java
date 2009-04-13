@@ -12,8 +12,16 @@ import org.ujoframework.core.annot.XmlAttribute;
  * @author Carlos David González Abraham
  */
 public class AtomGenerator extends AtomElement {
-    // generator elements
-    public static final UjoProperty<AtomGenerator,String> URI      = newProperty("uri"   , "");
-    public static final UjoProperty<AtomGenerator,String> VERSION  = newProperty("email" , "");
+    /* attributes */
+     @XmlAttribute
+    public static final UjoProperty<AtomGenerator,String> URI
+        = newProperty("uri",   "");
+    @XmlAttribute
+    public static final UjoProperty<AtomGenerator,String> VERSION
+        = newProperty("email", "");
+
+    /* body */
+    public static final UjoProperty<AtomGenerator,String> BODY
+        = newProperty("body",  "");
 }
 
