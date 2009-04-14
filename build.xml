@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="RssTask" default="compile" basedir=".">
+<project name="ujo-feedreader" default="compile" basedir=".">
     <description>Builds and tests ujo-feedreader.</description>
 
     <!-- ================ properties ================ -->
