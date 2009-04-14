@@ -28,8 +28,11 @@ import org.ujoframework.core.annot.XmlAttribute;
  */
 public class AtomAuthor extends AtomElement {
     // atom person elements
-    public static final UjoProperty<AtomAuthor,String> NAME   = newProperty("name"  , "");
-    public static final UjoProperty<AtomAuthor,String> URI    = newProperty("uri"   , "");
-    public static final UjoProperty<AtomAuthor,String> EMAIL  = newProperty("email" , "");
+    public static final UjoProperty<AtomAuthor,String> NAME
+        = newProperty("name"  , "");
+    public static final UjoProperty<AtomAuthor,String> URI
+        = newProperty("uri"   , "");
+    public static final UjoProperty<AtomAuthor,String> EMAIL
+        = newProperty("email" , "");
 }
 

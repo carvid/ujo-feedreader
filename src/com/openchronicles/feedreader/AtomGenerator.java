@@ -21,6 +21,7 @@ import org.ujoframework.UjoProperty;
 import org.ujoframework.extensions.ListProperty;
 import org.ujoframework.implementation.map.MapUjo;
 import org.ujoframework.core.annot.XmlAttribute;
+import org.ujoframework.core.annot.XmlElementBody;
 
 /**
  * This class represents the generator element of the Atom 1.0 specification.
@@ -30,13 +31,14 @@ public class AtomGenerator extends AtomElement {
     /* attributes */
      @XmlAttribute
     public static final UjoProperty<AtomGenerator,String> URI
-        = newProperty("uri",   "");
+        = newProperty("uri",     "");
     @XmlAttribute
     public static final UjoProperty<AtomGenerator,String> VERSION
-        = newProperty("email", "");
+        = newProperty("version", "");
 
     /* body */
+    @XmlElementBody
     public static final UjoProperty<AtomGenerator,String> BODY
-        = newProperty("body",  "");
+        = newProperty("body",    "");
 }
 

@@ -30,6 +30,6 @@ import org.ujoframework.core.annot.XmlElementBody;
 public class AtomTitle extends AtomElement {
     // atom title elements
     @XmlElementBody
-    public static final UjoProperty<AtomTitle,String> TITLE  = newProperty("title", "");
+    public static final UjoProperty<AtomTitle,String> BODY = newProperty("title", "");
 }
 

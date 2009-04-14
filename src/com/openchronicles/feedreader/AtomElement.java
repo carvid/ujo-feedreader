@@ -29,8 +29,8 @@ import org.ujoframework.core.annot.XmlAttribute;
 public abstract class AtomElement extends MapUjo {
     // atom common attributes
     @XmlAttribute
-    public static final UjoProperty<AtomAuthor,String> BASE   = newProperty("base", "");
+    public static final UjoProperty<AtomAuthor,String> BASE = newProperty("base", "");
     @XmlAttribute
-    public static final UjoProperty<AtomAuthor,String> LANG   = newProperty("lang", "");
+    public static final UjoProperty<AtomAuthor,String> LANG = newProperty("lang", "");
 }
 

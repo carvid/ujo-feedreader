@@ -29,6 +29,7 @@ import org.ujoframework.core.annot.XmlElementBody;
  */
 public class AtomId extends AtomElement {
     @XmlElementBody
-    public static final UjoProperty<AtomId,String> ID     = newProperty("id", "");
+    public static final UjoProperty<AtomId,String> BODY 
+        = newProperty("body", "");
 }
 

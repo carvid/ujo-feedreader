@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="RssTask" default="compile" basedir=".">
-    <description>Builds, tests, and runs the jWorkSheet module RssTask.</description>
+    <description>Builds and tests ujo-feedreader.</description>
 
     <!-- ================ properties ================ -->
     <property file="build.properties"/>
@@ -10,12 +10,15 @@
     <property name="src.home"       value="${basedir}/src"/>
     <property name="build.home"     value="${basedir}/build"/>
     <property name="dist.home"      value="${basedir}/dist"/>
+    <property name="test.home"      value="${basedir}/test"/>
 
     <property name="compile.debug"          value="true"/>
     <property name="compile.deprecation"    value="false"/>
     <property name="compile.optimize"       value="true"/>
     <property name="compile.lint"           value="unchecked"/>
     <property name="compile.encoding"       value="UTF-8"/>
+
+    <property name="test.classes"   value="${build.home}/classes"/>
 
     <!-- ================ init ================ -->
 
@@ -37,6 +40,9 @@
         <fileset dir="${basedir}/lib">
           <include name="*.jar"/>
         </fileset>
+
+        <!-- unit tests -->
+        <pathelement location="${junit.junit.jar}"/>
     </path>
 
     <target name="compile" depends="prepare"
@@ -53,9 +59,25 @@
             <compilerarg value="-Xlint:${compile.lint}"/>
         </javac>
 
+        <!-- Compile test classes -->
+        <javac srcdir="${test.home}"
+              destdir="${build.home}/classes"
+                debug="${compile.debug}"
+          deprecation="${compile.deprecation}"
+             encoding="${compile.encoding}"
+             optimize="${compile.optimize}">
+            <classpath refid="compile.classpath"/>
+            <compilerarg value="-Xlint:${compile.lint}"/>
+        </javac>
+
         <!-- Copy application resources -->
         <copy  todir="${build.home}/classes">
             <fileset dir="${src.home}" excludes="**/*.java"/>
+        </copy>
+
+        <!-- Copy test resources -->
+        <copy  todir="${build.home}/classes">
+            <fileset dir="${test.home}" excludes="**/*.java"/>
         </copy>
     </target>
 
@@ -63,6 +85,27 @@
         <!-- Create build directories as needed -->
         <mkdir  dir="${build.home}"/>
         <mkdir  dir="${build.home}/classes"/>
+    </target>
+
+    <!-- ================ tests ================ -->
+
+    <target name="test" depends="compile"
+        description="Run all tests.">
+
+        <path id="test.classpath">
+            <path refid="compile.classpath"/>
+            <pathelement location="${test.classes}"/>
+        </path>
+
+        <junit fork="yes" haltonfailure="yes">
+            <batchtest fork="yes">
+                <fileset dir="${test.classes}">
+                    <include name="**/*Test.class" />
+                </fileset>
+            </batchtest>
+            <formatter type="plain" usefile="false" />
+            <classpath refid="test.classpath" />
+        </junit>
     </target>
 
 </project>
