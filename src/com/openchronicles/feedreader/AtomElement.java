@@ -18,9 +18,11 @@ package com.openchronicles.feedreader;
 import java.util.ArrayList;
 
 import org.ujoframework.UjoProperty;
+import org.ujoframework.extensions.UjoAction;
 import org.ujoframework.extensions.ListProperty;
 import org.ujoframework.implementation.map.MapUjo;
 import org.ujoframework.core.annot.XmlAttribute;
+import static org.ujoframework.extensions.UjoAction.*;
 
 /**
  * This abstract class represents a element of the Atom 1.0 specification.
@@ -32,5 +34,16 @@ public abstract class AtomElement extends MapUjo {
     public static final UjoProperty<AtomAuthor,String> BASE = newProperty("base", "");
     @XmlAttribute
     public static final UjoProperty<AtomAuthor,String> LANG = newProperty("lang", "");
+
+    @Override
+    /** Prevents to XML export of properties with default value. */
+    public boolean readAuthorization(UjoAction action, UjoProperty property, Object value) {
+        switch(action.getType()) {
+            case ACTION_XML_EXPORT:
+                return !property.isDefault(this);
+            default:
+                return super.readAuthorization(action, property, value);
+        }
+    }
 }
 
