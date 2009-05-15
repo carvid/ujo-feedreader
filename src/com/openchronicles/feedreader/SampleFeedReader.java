@@ -25,27 +25,46 @@ import org.ujoframework.core.UjoManagerXML;
 public class SampleFeedReader {
     public static void main(String args[]) {
 
-       // TODO: convert this class into a useful example of the use of ujo-feedreader
-       String path = SampleFeedReader.class.getPackage().getName().replace('.', '/');
-       URL url = SampleFeedReader.class.getResource("/" + path + "/resources/sample.atom");
-       File atomFile = new File(url.getPath());
-       
-       try {
-           AtomFeed feed = UjoManagerXML.getInstance().parseXML(atomFile, AtomFeed.class, "Data Loading");
-           FileWriter out = new FileWriter("first_output.xml");
-           UjoManagerXML.getInstance().saveXML(out, "feed", feed, null, "Feed export");
-           out.close();
-       } catch (Exception e) {
-           System.out.println(e.getMessage() + e.getCause());
-       }
+        String url = args[0];
 
-       try {
-           AtomFeed feed = UjoManagerXML.getInstance().parseXML(atomFile, AtomFeed.class, "Data Loading");
-           FileWriter out = new FileWriter("second_output.xml");
-           UjoManagerXML.getInstance().saveXML(out, "feed", feed, null, "Feed export");
-           out.close();
-       } catch (Exception e) {
-           System.out.println(e.getMessage() + e.getCause());
-       }
+        try {
+            // get feed
+            AtomFeed feed = FeedManager.readFeed(url);
+
+            // display feed's title
+            System.out.println ("\n");
+            System.err.println ("=== " + AtomTitle.BODY.of(AtomFeed.TITLE.of(feed)) + " ===");
+
+            // display feed's links
+            for (AtomLink link : AtomFeed.LINKS.of(feed)) {
+                System.err.println ("* URL: " + AtomLink.HREF.of(link));
+            }
+
+            for (AtomEntry item : AtomFeed.ENTRIES.of(feed)) {
+
+                //displays item's title
+                System.out.println ("\n");
+                System.out.println (AtomTitle.BODY.of ((AtomEntry.TITLE.of(item))) +
+                    "(" + AtomUpdated.BODY.of ((AtomEntry.UPDATED.of(item))) + ")");
+                System.out.println ("-------------------------------------------------------------");
+
+                //displays item's authors
+                for (AtomAuthor author : AtomEntry.AUTHORS.of(item)) {
+                    System.out.println ("* Author: " + AtomAuthor.NAME.of(author) +
+                        " <" + AtomAuthor.EMAIL.of(author) + ">");
+                }
+
+                //displays item's content (limit to 100 characters)
+                System.out.println ("\n");
+                System.out.println (AtomContent.BODY.of ((AtomEntry.CONTENT.of(item))).length() <= 100
+                    ? AtomContent.BODY.of ((AtomEntry.CONTENT.of(item)))
+                    : AtomContent.BODY.of ((AtomEntry.CONTENT.of(item))).substring(1,100) + "..."
+                );
+            }
+
+        } catch (Exception e) {
+            System.err.println("No se pudo iniciar el canal.");
+            System.err.println(e.getMessage());
+        }
     }
 }
