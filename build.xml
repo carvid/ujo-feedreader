@@ -19,6 +19,7 @@
     <property name="compile.encoding"       value="UTF-8"/>
 
     <property name="test.classes"   value="${build.home}/classes"/>
+    <property name="dist.name"      value="${ant.project.name}"/>
 
     <!-- ================ init ================ -->
 
@@ -106,6 +107,17 @@
             <formatter type="plain" usefile="false" />
             <classpath refid="test.classpath" />
         </junit>
+    </target>
+
+    <!-- ============= distribution ============ -->
+
+    <target name="jar" depends="compile"
+        description="Creates a JAR file">
+
+        <mkdir dir="${dist.home}"/>
+
+        <jar destfile="${dist.home}/${dist.name}.jar"
+            basedir="${build.home}" />
     </target>
 
 </project>
